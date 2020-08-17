@@ -1,0 +1,7 @@
+.DS_Store
+conf.toml
+.vscode
+.idea
+go.sum
+front/node_modules
+front/dist
