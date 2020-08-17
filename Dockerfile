@@ -6,9 +6,14 @@ EXPOSE 8000
 
 # 需手动编译backend/yearning
 COPY backend/yearning  /opt/yearning
-COPY conf.toml /opt/conf.toml
+# 审核引擎
 COPY backend/juno  /opt/juno
+# 配置文件
+COPY conf.toml /opt/conf.toml
+# 前端文件
 COPY front/dist /opt/dist
+
+COPY docker/entrypoint.sh /opt/entrypoint.sh
 
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
 
@@ -18,5 +23,5 @@ RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && echo "Asia/Shangh
 
 WORKDIR /opt
 
-CMD ["/opt/yearning", "-s"]
+ENTRYPOINT ["/opt/entrypoint.sh"]
 
